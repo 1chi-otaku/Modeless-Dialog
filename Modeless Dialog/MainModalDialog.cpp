@@ -20,9 +20,17 @@ void CMainModalDialog::Cls_OnClose(HWND hwnd)
 
 BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
-	hEdit1 = GetDlgItem(hwnd, IDC_EDIT1);
-	hStatic1 = GetDlgItem(hwnd, IDC_STATIC1);
-	SetWindowText(hEdit1, TEXT("Передача данных дополнительному диалогу!"));
+	hButtonCafe = GetDlgItem(hwnd, IDC_BUTTON1);
+	hButtonPetrol = GetDlgItem(hwnd, IDC_BUTTON3);
+	hButtonProceed = GetDlgItem(hwnd, IDC_BUTTON4);
+	
+	hEditPetrol = GetDlgItem(hwnd, IDC_EDIT1);
+	hEditCafe = GetDlgItem(hwnd, IDC_EDIT3);
+	hEditTotal = GetDlgItem(hwnd, IDC_EDIT4);
+	SetWindowText(hEditPetrol, TEXT("0"));
+	SetWindowText(hEditCafe, TEXT("0"));
+	SetWindowText(hEditTotal, TEXT("0"));
+
 	return TRUE;
 }
 
@@ -45,7 +53,7 @@ void CMainModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeN
 		ShowWindow(CafeModalDialog::hAddDialog, SW_RESTORE);
 		TCHAR buffer[200];
 		// Получаем текст с текстового поля ввода
-		GetWindowText(hEdit1, buffer, 200);
+		//GetWindowText(hEdit1, buffer, 200);
 		// Отображаем текст на статике дополнительного диалога
 		SetWindowText(dlg.hStatic, buffer);
 	}

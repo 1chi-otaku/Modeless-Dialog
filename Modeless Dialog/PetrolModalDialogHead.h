@@ -1,17 +1,18 @@
 #pragma once
 #include "header.h"
 
-class CMainModalDialog
+class PetrolModalDialog
 {
 public:
-	CMainModalDialog(void);
+	PetrolModalDialog(void);
 public:
-	~CMainModalDialog(void);
+	~PetrolModalDialog(void);
 	static BOOL CALLBACK DlgProc(HWND hWnd, UINT mes, WPARAM wp, LPARAM lp);
-	static CMainModalDialog* ptr;
+	static PetrolModalDialog* ptr;
 	BOOL Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam);
 	void Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify);
 	void Cls_OnClose(HWND hwnd);
-	HWND hButtonPetrol, hButtonCafe, hButtonProceed;
-	HWND hEditPetrol, hEditCafe, hEditTotal;
+	HWND hStatic;
+	static HWND hAddDialog; // дескриптор дополнительного диалога
 };
+

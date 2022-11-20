@@ -24,6 +24,9 @@
     <ClCompile Include="CafeModalDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PetrolModalDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CafeModalDialogHead.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PetrolModalDialogHead.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
