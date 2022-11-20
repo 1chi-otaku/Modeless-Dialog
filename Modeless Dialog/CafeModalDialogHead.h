@@ -13,5 +13,6 @@ public:
 	void Cls_OnClose(HWND hwnd);
 	HWND hTotal;
 	HWND hPriceAndQua[8];
+	HWND hCheckFood[4];
 	TCHAR text[200];
 };
