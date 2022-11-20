@@ -1,26 +1,26 @@
 ﻿#include "CafeModalDialogHead.h"
 
-CModelessDialog* CModelessDialog::ptr = NULL;
-HWND CModelessDialog::hAddDialog = NULL;
+CafeModalDialog* CafeModalDialog::ptr = NULL;
+HWND CafeModalDialog::hAddDialog = NULL;
 
-CModelessDialog::CModelessDialog(void)
+CafeModalDialog::CafeModalDialog(void)
 {
 	ptr = this;
 }
 
-CModelessDialog::~CModelessDialog(void)
+CafeModalDialog::~CafeModalDialog(void)
 {
 
 }
 
-void CModelessDialog::Cls_OnClose(HWND hwnd)
+void CafeModalDialog::Cls_OnClose(HWND hwnd)
 {
 	// Разрушаем немодальное диалоговое окно
 	DestroyWindow(hwnd);
 	hAddDialog = NULL;
 }
 
-BOOL CModelessDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
+BOOL CafeModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
 	hStatic = GetDlgItem(hwnd, IDC_STATIC1);
 	SetWindowText(hwnd, TEXT("Дополнительный немодальный диалог"));
@@ -29,7 +29,7 @@ BOOL CModelessDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 }
 
 
-void CModelessDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
+void CafeModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
 	if (id == IDOK)
 	{
@@ -51,7 +51,7 @@ void CModelessDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNo
 	}
 }
 
-BOOL CALLBACK CModelessDialog::DlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+BOOL CALLBACK CafeModalDialog::DlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{

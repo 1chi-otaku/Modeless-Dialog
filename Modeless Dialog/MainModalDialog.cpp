@@ -32,17 +32,17 @@ void CMainModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeN
 	if (id == IDC_BUTTON1)
 	{
 		// Проверим, открыто ли дополнительное немодальное окно
-		if (CModelessDialog::hAddDialog)
+		if (CafeModalDialog::hAddDialog)
 		{
 			//Активизируем дополнительное немодальное окно
-			SetForegroundWindow(CModelessDialog::hAddDialog);
+			SetForegroundWindow(CafeModalDialog::hAddDialog);
 			return;
 		}
-		CModelessDialog dlg;
+		CafeModalDialog dlg;
 		// Создаем немодальное диалоговое окно
-		CModelessDialog::hAddDialog = CreateDialog(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), hwnd, CModelessDialog::DlgProc);
+		CafeModalDialog::hAddDialog = CreateDialog(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), hwnd, CafeModalDialog::DlgProc);
 		// Отображаем окно	
-		ShowWindow(CModelessDialog::hAddDialog, SW_RESTORE);
+		ShowWindow(CafeModalDialog::hAddDialog, SW_RESTORE);
 		TCHAR buffer[200];
 		// Получаем текст с текстового поля ввода
 		GetWindowText(hEdit1, buffer, 200);
