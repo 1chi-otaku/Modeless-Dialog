@@ -39,6 +39,16 @@ void CMainModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeN
 		TCHAR buffer[200];
 		CafeModalDialog dlg;
 		INT_PTR result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG4), hwnd, CafeModalDialog::DlgProc);
+		int sum = 0;
+		int total = 0;
+		if (result == IDOK) {
+			GetWindowText(hEditCafe, buffer, 200);
+			sum = _wtoi(buffer);
+			GetWindowText(hEditPetrol, buffer, 200);
+			total = sum + _wtoi(buffer);
+		}
+		wsprintf(buffer, TEXT("%d"), total);
+		SetWindowText(hEditTotal, buffer);
 		
 	}
 	if (id == IDC_BUTTON3) { //Petrol

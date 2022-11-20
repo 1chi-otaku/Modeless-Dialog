@@ -12,7 +12,8 @@ public:
 	void Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify);
 	void Cls_OnClose(HWND hwnd);
 	HWND hTotal;
-	HWND hPriceAndQua[8];
+	HWND hPrice[4];
+	HWND hQua[4];
 	HWND hCheckFood[4];
 	TCHAR text[200];
 };
