@@ -1,27 +1,30 @@
 ﻿#include "PetrolModalDialogHead.h"
 
 PetrolModalDialog* PetrolModalDialog::ptr = NULL;
-HWND PetrolModalDialog::hAddDialog = NULL;
 
 PetrolModalDialog::PetrolModalDialog(void)
 {
 	ptr = this;
 }
 
-PetrolModalDialog::~PetrolModalDialog(void)
-{
-
-}
 
 void PetrolModalDialog::Cls_OnClose(HWND hwnd)
 {
-	// Разрушаем немодальное диалоговое окно
-	DestroyWindow(hwnd);
-	hAddDialog = NULL;
+	EndDialog(hwnd, IDCANCEL);
 }
 
 BOOL PetrolModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
+	hEditPrice = GetDlgItem(hwnd, IDC_EDIT2);
+	hEditQua = GetDlgItem(hwnd, IDC_EDIT3);
+	hEditSum = GetDlgItem(hwnd, IDC_EDIT4);
+	hEditTotal = GetDlgItem(hwnd, IDC_EDIT5);
+	
+	SetWindowText(hEditPrice, TEXT("0"));
+	SetWindowText(hEditQua, TEXT("0"));
+	SetWindowText(hEditSum, TEXT("0"));
+	SetWindowText(hEditTotal, TEXT("0"));
+
 	
 	return TRUE;
 }
@@ -31,13 +34,11 @@ void PetrolModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT code
 {
 	if (id == IDOK)
 	{
-		
+		EndDialog(hwnd, IDOK);
 	}
 	else if (id == IDCANCEL)
 	{
-		// Разрушаем немодальное диалоговое окно
-		DestroyWindow(hwnd);
-		hAddDialog = NULL;
+		EndDialog(hwnd, IDCANCEL);
 	}
 }
 

@@ -1,5 +1,6 @@
 ﻿#include "MainModalDialog.h"
 #include "CafeModalDialogHead.h"
+#include "PetrolModalDialogHead.h"
 
 CMainModalDialog* CMainModalDialog::ptr = NULL;
 
@@ -8,10 +9,6 @@ CMainModalDialog::CMainModalDialog(void)
 	ptr = this;
 }
 
-CMainModalDialog::~CMainModalDialog(void)
-{
-
-}
 
 void CMainModalDialog::Cls_OnClose(HWND hwnd)
 {
@@ -22,7 +19,7 @@ BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam
 {
 	hButtonCafe = GetDlgItem(hwnd, IDC_BUTTON1);
 	hButtonPetrol = GetDlgItem(hwnd, IDC_BUTTON3);
-	hButtonProceed = GetDlgItem(hwnd, IDC_BUTTON4);
+	//hButtonProceed = GetDlgItem(hwnd, IDC_BUTTON4);
 	
 	hEditPetrol = GetDlgItem(hwnd, IDC_EDIT1);
 	hEditCafe = GetDlgItem(hwnd, IDC_EDIT3);
@@ -37,25 +34,18 @@ BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam
 
 void CMainModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
-	if (id == IDC_BUTTON1)
+	if (id == IDC_BUTTON1) //Cafe
 	{
-		// Проверим, открыто ли дополнительное немодальное окно
-		if (CafeModalDialog::hAddDialog)
-		{
-			//Активизируем дополнительное немодальное окно
-			SetForegroundWindow(CafeModalDialog::hAddDialog);
-			return;
-		}
-		CafeModalDialog dlg;
-		// Создаем немодальное диалоговое окно
-		CafeModalDialog::hAddDialog = CreateDialog(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG2), hwnd, CafeModalDialog::DlgProc);
-		// Отображаем окно	
-		ShowWindow(CafeModalDialog::hAddDialog, SW_RESTORE);
 		TCHAR buffer[200];
-		// Получаем текст с текстового поля ввода
-		//GetWindowText(hEdit1, buffer, 200);
-		// Отображаем текст на статике дополнительного диалога
-		SetWindowText(dlg.hStatic, buffer);
+		CafeModalDialog dlg;
+		INT_PTR result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG4), hwnd, CafeModalDialog::DlgProc);
+		
+	}
+	if (id == IDC_BUTTON3) { //Petrol
+		TCHAR buffer[200];
+		PetrolModalDialog dlg;
+		INT_PTR result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG3), hwnd, PetrolModalDialog::DlgProc);
+
 	}
 }
 

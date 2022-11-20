@@ -2,12 +2,10 @@
 // Microsoft Visual C++ generated include file.
 // Used by Modeless Dialog.rc
 //
-#define IDD_DIALOG2                     101
 #define IDD_DIALOG1                     103
 #define IDD_DIALOG3                     105
 #define IDD_DIALOG4                     107
 #define IDC_EDIT1                       1001
-#define IDC_STATIC1                     1002
 #define IDC_EDIT3                       1002
 #define IDC_STATIC2                     1003
 #define IDC_EDIT4                       1003
@@ -31,13 +29,22 @@
 #define IDC_CHECK4                      1016
 #define IDC_STATIC                      -1
 
+#define IDC_EDIT01                      10001
+#define IDC_EDIT02                      10002
+#define IDC_EDIT03                      10003
+#define IDC_EDIT04                      10004
+#define IDC_EDIT05                      10005
+#define IDC_EDIT06                      10006
+#define IDC_EDIT07                      10007
+#define IDC_EDIT08                      10008
+
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        109
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1014
+#define _APS_NEXT_CONTROL_VALUE         1020
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

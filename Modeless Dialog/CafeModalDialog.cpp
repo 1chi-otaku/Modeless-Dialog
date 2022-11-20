@@ -1,30 +1,32 @@
 ﻿#include "CafeModalDialogHead.h"
 
 CafeModalDialog* CafeModalDialog::ptr = NULL;
-HWND CafeModalDialog::hAddDialog = NULL;
 
 CafeModalDialog::CafeModalDialog(void)
 {
 	ptr = this;
 }
 
-CafeModalDialog::~CafeModalDialog(void)
-{
-
-}
 
 void CafeModalDialog::Cls_OnClose(HWND hwnd)
 {
-	// Разрушаем немодальное диалоговое окно
-	DestroyWindow(hwnd);
-	hAddDialog = NULL;
+	EndDialog(hwnd, IDCANCEL);
 }
 
 BOOL CafeModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
-	hStatic = GetDlgItem(hwnd, IDC_STATIC1);
-	SetWindowText(hwnd, TEXT("Дополнительный немодальный диалог"));
-	SetWindowText(GetDlgItem(hwnd, IDC_EDIT1), TEXT("Передача данных главному диалогу!"));
+	hTotal = GetDlgItem(hwnd, IDC_EDIT5);
+	for (int i = 0; i < 8; i++)
+		hPriceAndQua[i] = GetDlgItem(hwnd, IDC_EDIT01+i);
+
+	
+	SetWindowText(hPriceAndQua[0], TEXT("19.99"));
+	SetWindowText(hPriceAndQua[1], TEXT("1.99"));
+	SetWindowText(hPriceAndQua[2], TEXT("12.99"));
+	SetWindowText(hPriceAndQua[3], TEXT("21.99"));
+
+	SetWindowText(hTotal, TEXT("0"));
+
 	return TRUE;
 }
 
@@ -33,22 +35,14 @@ void CafeModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNo
 {
 	if (id == IDOK)
 	{
-		TCHAR buffer[200];
-		// Получаем текст с текстового поля ввода
-		GetWindowText(GetDlgItem(hwnd, IDC_EDIT1), buffer, 200);
-		// Получаем дескриптор родительского (главного) окна
-		HWND hParent = GetParent(hwnd);
-		// Получаем дескриптор статика главного диалога
-		HWND hStatic = GetDlgItem(hParent, IDC_STATIC1);
-		// Отображаем текст на статике главного диалога
-		SetWindowText(hStatic, buffer);
+		
+		EndDialog(hwnd, IDOK);
 	}
 	else if (id == IDCANCEL)
 	{
-		// Разрушаем немодальное диалоговое окно
-		DestroyWindow(hwnd);
-		hAddDialog = NULL;
+		EndDialog(hwnd, IDCANCEL);
 	}
+	
 }
 
 BOOL CALLBACK CafeModalDialog::DlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
