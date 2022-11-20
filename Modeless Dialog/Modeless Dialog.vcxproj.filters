@@ -21,7 +21,7 @@
     <ClCompile Include="ModelessDialogApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelessDlg.cpp">
+    <ClCompile Include="CafeModalDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="MainModalDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelessDlg.h">
+    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="CafeModalDialogHead.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

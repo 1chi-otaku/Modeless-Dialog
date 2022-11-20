@@ -91,14 +91,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CafeModalDialog.cpp" />
     <ClCompile Include="MainModalDialog.cpp" />
     <ClCompile Include="ModelessDialogApp.cpp" />
-    <ClCompile Include="ModelessDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CafeModalDialogHead.h" />
     <ClInclude Include="header.h" />
     <ClInclude Include="MainModalDialog.h" />
-    <ClInclude Include="ModelessDlg.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

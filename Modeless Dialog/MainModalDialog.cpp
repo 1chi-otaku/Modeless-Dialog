@@ -1,5 +1,5 @@
 ﻿#include "MainModalDialog.h"
-#include "ModelessDlg.h"
+#include "CafeModalDialogHead.h"
 
 CMainModalDialog* CMainModalDialog::ptr = NULL;
 

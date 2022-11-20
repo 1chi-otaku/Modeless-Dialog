@@ -1,4 +1,4 @@
-﻿#include "ModelessDlg.h"
+﻿#include "CafeModalDialogHead.h"
 
 CModelessDialog* CModelessDialog::ptr = NULL;
 HWND CModelessDialog::hAddDialog = NULL;
@@ -10,17 +10,17 @@ CModelessDialog::CModelessDialog(void)
 
 CModelessDialog::~CModelessDialog(void)
 {
-	
+
 }
 
 void CModelessDialog::Cls_OnClose(HWND hwnd)
 {
 	// Разрушаем немодальное диалоговое окно
-	DestroyWindow(hwnd); 
+	DestroyWindow(hwnd);
 	hAddDialog = NULL;
 }
 
-BOOL CModelessDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) 
+BOOL CModelessDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
 	hStatic = GetDlgItem(hwnd, IDC_STATIC1);
 	SetWindowText(hwnd, TEXT("Дополнительный немодальный диалог"));
@@ -31,7 +31,7 @@ BOOL CModelessDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 
 void CModelessDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
-	if(id == IDOK)
+	if (id == IDOK)
 	{
 		TCHAR buffer[200];
 		// Получаем текст с текстового поля ввода
@@ -43,17 +43,17 @@ void CModelessDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNo
 		// Отображаем текст на статике главного диалога
 		SetWindowText(hStatic, buffer);
 	}
-	else if(id == IDCANCEL)
+	else if (id == IDCANCEL)
 	{
 		// Разрушаем немодальное диалоговое окно
-		DestroyWindow(hwnd); 
+		DestroyWindow(hwnd);
 		hAddDialog = NULL;
 	}
 }
 
 BOOL CALLBACK CModelessDialog::DlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	switch(message)
+	switch (message)
 	{
 		HANDLE_MSG(hwnd, WM_CLOSE, ptr->Cls_OnClose);
 		HANDLE_MSG(hwnd, WM_INITDIALOG, ptr->Cls_OnInitDialog);
