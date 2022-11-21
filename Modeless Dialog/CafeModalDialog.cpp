@@ -7,16 +7,12 @@ CafeModalDialog::CafeModalDialog(void)
 	ptr = this;
 }
 
-
-
 void CafeModalDialog::Cls_OnClose(HWND hwnd)
 {
 	EndDialog(hwnd, IDCANCEL);
 }
 
-
-
-int CafeModalDialog::CalculateSum(HWND hwnd)
+int CafeModalDialog::CalculateSum(HWND hwnd)		//Calculates the current sum according to the marked items
 {
 	TCHAR buffer[16];
 	int sum = 0;
@@ -37,11 +33,12 @@ int CafeModalDialog::CalculateSum(HWND hwnd)
 
 void CafeModalDialog::CheckActive(HWND hwnd)
 {
+	//Getting state of buttons.
 	LRESULT lCheck1 = SendMessage(ptr->hCheckFood[0], BM_GETCHECK, 0, 0);
 	LRESULT lCheck2 = SendMessage(ptr->hCheckFood[1], BM_GETCHECK, 0, 0);
 	LRESULT lCheck3 = SendMessage(ptr->hCheckFood[2], BM_GETCHECK, 0, 0);
 	LRESULT lCheck4 = SendMessage(ptr->hCheckFood[3], BM_GETCHECK, 0, 0);
-
+	//Buttons state logic.
 	if (lCheck1 == BST_CHECKED)
 		EnableWindow(ptr->hQua[0], TRUE);
 	else {
@@ -66,13 +63,15 @@ void CafeModalDialog::CheckActive(HWND hwnd)
 
 BOOL CafeModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
+	//Getting handles of Cafe Window.
 	for (int i = 0; i < 4; i++) {
 		hPrice[i] = GetDlgItem(hwnd, IDC_EDIT01 + i);
 		hQua[i] = GetDlgItem(hwnd, IDC_EDIT05 + i);
 	}
 	for (int i = 0; i < 4; i++)
 		hCheckFood[i] = GetDlgItem(hwnd, IDC_CHECK1 + i);
-
+	hTotal = GetDlgItem(hwnd, IDC_EDIT5);
+	//Setting default Edit Control values.
 	SetWindowText(hPrice[0], TEXT("19"));
 	SetWindowText(hPrice[1], TEXT("2"));
 	SetWindowText(hPrice[2], TEXT("12"));
@@ -81,13 +80,12 @@ BOOL CafeModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 	SetWindowText(hQua[1], TEXT("0"));
 	SetWindowText(hQua[2], TEXT("0"));
 	SetWindowText(hQua[3], TEXT("0"));
+	SetWindowText(hTotal, TEXT("0"));
+	//Disable Qua. Edit Control by default.
 	EnableWindow(hQua[0], FALSE);
 	EnableWindow(hQua[1], FALSE);
 	EnableWindow(hQua[2], FALSE);
-	EnableWindow(hQua[3], FALSE);
-
-	hTotal = GetDlgItem(hwnd, IDC_EDIT5);
-	SetWindowText(hTotal, TEXT("0"));
+	EnableWindow(hQua[3], FALSE);	
 
 	return TRUE;
 }
@@ -95,23 +93,23 @@ BOOL CafeModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 
 void CafeModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
-	ptr->CheckActive(hwnd);
+	ptr->CheckActive(hwnd);													//Check state of buttons.
 
-	if (id == IDC_BUTTON1) {
+	if (id == IDC_BUTTON1) {												//If 'Calculate' button has been pressed:
 		TCHAR buffer[16];
-		int a = ptr->CalculateSum(hwnd);
+		int a = ptr->CalculateSum(hwnd);									//Calculates current sum.
 		wsprintf(buffer, TEXT("%d"), a);
-		SetWindowText(ptr->hTotal, buffer);
+		SetWindowText(ptr->hTotal, buffer);		
 	}
 	
-	if (id == IDOK)
+	if (id == IDOK) //If OKAY is pressed
 	{
 		TCHAR buffer[16];
 		int total = CalculateSum(hwnd);
 		wsprintf(buffer, TEXT("%d"), total);
-		HWND hParent = GetParent(hwnd);
+		HWND hParent = GetParent(hwnd);										//Getting handle of parent window.
 		HWND hMainFood = GetDlgItem(hParent, IDC_EDIT3);
-		SetWindowText(hMainFood, buffer);
+		SetWindowText(hMainFood, buffer);									//Setting Total Edit Control value to the Cafe Edit Control of Parent window.
 
 		EndDialog(hwnd, IDOK);
 	}

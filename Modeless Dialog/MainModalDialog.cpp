@@ -9,7 +9,6 @@ CMainModalDialog::CMainModalDialog(void)
 	ptr = this;
 }
 
-
 void CMainModalDialog::Cls_OnClose(HWND hwnd)
 {
 	EndDialog(hwnd, IDCANCEL);
@@ -17,10 +16,11 @@ void CMainModalDialog::Cls_OnClose(HWND hwnd)
 
 BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
-	
+	//Getting handles for EditControl objects
 	hEditPetrol = GetDlgItem(hwnd, IDC_EDIT1);
 	hEditCafe = GetDlgItem(hwnd, IDC_EDIT3);
 	hEditTotal = GetDlgItem(hwnd, IDC_EDIT4);
+	//Settings Edit controls object with 0 by default.
 	SetWindowText(hEditPetrol, TEXT("0"));
 	SetWindowText(hEditCafe, TEXT("0"));
 	SetWindowText(hEditTotal, TEXT("0"));
@@ -28,30 +28,29 @@ BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam
 	return TRUE;
 }
 
-
 void CMainModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
-	if (id == IDC_BUTTON1 || id == IDC_BUTTON3) 
+	if (id == IDC_BUTTON1 || id == IDC_BUTTON3) //If Petrol or Cafe buttons are pressed.
 	{
+		INT_PTR result;																								
 		TCHAR buffer[200];
 		int sum = 0;
 		int total = 0;
-		INT_PTR result;
-		if (id == IDC_BUTTON1) {
+		if (id == IDC_BUTTON1) {	//If Cafe button pressed
 			CafeModalDialog dlg;
-			result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG4), hwnd, CafeModalDialog::DlgProc);
+			result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG4), hwnd, CafeModalDialog::DlgProc);				//Creates a Cafe window.
 		}
-		else {
+		else {						//If Petrol button pressed
 			PetrolModalDialog dlg;
-			result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG3), hwnd, PetrolModalDialog::DlgProc);
+			result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG3), hwnd, PetrolModalDialog::DlgProc);				//Creates a Petrol window.
 		}
-		if (result == IDOK) {
-			GetWindowText(hEditCafe, buffer, 200);
+		if (result == IDOK) { //If OKAY is pressed
+			GetWindowText(hEditCafe, buffer, 200);					//Getting Cafe sum.
 			sum = _wtoi(buffer);
-			GetWindowText(hEditPetrol, buffer, 200);
-			total = sum + _wtoi(buffer);
+			GetWindowText(hEditPetrol, buffer, 200);				
+			total = sum + _wtoi(buffer);						//Getting Petrol sum and add it to cafe sum.
 			wsprintf(buffer, TEXT("%d"), total);
-			SetWindowText(hEditTotal, buffer);
+			SetWindowText(hEditTotal, buffer);						//Writes the result to 'Total' Edit control.
 		}
 	}
 	
