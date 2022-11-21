@@ -11,6 +11,8 @@ public:
 	BOOL Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam);
 	void Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify);
 	void Cls_OnClose(HWND hwnd);
+	int CalculateSum(HWND hwnd);
+	void CheckActive(HWND hwnd);
 	HWND hTotal;
 	HWND hPrice[4];
 	HWND hQua[4];
