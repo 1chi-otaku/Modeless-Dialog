@@ -54,6 +54,10 @@ void CMainModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeN
 		}
 	}
 	
+	if (id == IDOK) {
+		int result = MessageBox(0, TEXT("Thank you!"), TEXT("Come again"), MB_OK | MB_ICONASTERISK);
+		EndDialog(hwnd, IDOK);
+	}
 }
 
 BOOL CALLBACK CMainModalDialog::DlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
