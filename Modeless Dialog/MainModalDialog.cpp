@@ -17,9 +17,6 @@ void CMainModalDialog::Cls_OnClose(HWND hwnd)
 
 BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
-	hButtonCafe = GetDlgItem(hwnd, IDC_BUTTON1);
-	hButtonPetrol = GetDlgItem(hwnd, IDC_BUTTON3);
-	//hButtonProceed = GetDlgItem(hwnd, IDC_BUTTON4);
 	
 	hEditPetrol = GetDlgItem(hwnd, IDC_EDIT1);
 	hEditCafe = GetDlgItem(hwnd, IDC_EDIT3);
@@ -34,29 +31,30 @@ BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam
 
 void CMainModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
-	if (id == IDC_BUTTON1) //Cafe
+	if (id == IDC_BUTTON1 || id == IDC_BUTTON3) 
 	{
 		TCHAR buffer[200];
-		CafeModalDialog dlg;
-		INT_PTR result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG4), hwnd, CafeModalDialog::DlgProc);
 		int sum = 0;
 		int total = 0;
+		INT_PTR result;
+		if (id == IDC_BUTTON1) {
+			CafeModalDialog dlg;
+			result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG4), hwnd, CafeModalDialog::DlgProc);
+		}
+		else {
+			PetrolModalDialog dlg;
+			result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG3), hwnd, PetrolModalDialog::DlgProc);
+		}
 		if (result == IDOK) {
 			GetWindowText(hEditCafe, buffer, 200);
 			sum = _wtoi(buffer);
 			GetWindowText(hEditPetrol, buffer, 200);
 			total = sum + _wtoi(buffer);
+			wsprintf(buffer, TEXT("%d"), total);
+			SetWindowText(hEditTotal, buffer);
 		}
-		wsprintf(buffer, TEXT("%d"), total);
-		SetWindowText(hEditTotal, buffer);
-		
 	}
-	if (id == IDC_BUTTON3) { //Petrol
-		TCHAR buffer[200];
-		PetrolModalDialog dlg;
-		INT_PTR result = DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_DIALOG3), hwnd, PetrolModalDialog::DlgProc);
-
-	}
+	
 }
 
 BOOL CALLBACK CMainModalDialog::DlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

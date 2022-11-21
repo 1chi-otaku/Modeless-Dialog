@@ -14,6 +14,8 @@ public:
 	HWND hStatic;
 	TCHAR text[200];
 	HWND hEditTotal, hEditSum, hEditQua, hEditPrice;
+	HWND hRadio1, hRadio2;
+	HWND hComboBox;
 
 };
 

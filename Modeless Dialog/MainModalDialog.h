@@ -11,6 +11,5 @@ public:
 	BOOL Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam);
 	void Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify);
 	void Cls_OnClose(HWND hwnd);
-	HWND hButtonPetrol, hButtonCafe, hButtonProceed;
 	HWND hEditPetrol, hEditCafe, hEditTotal;
 };

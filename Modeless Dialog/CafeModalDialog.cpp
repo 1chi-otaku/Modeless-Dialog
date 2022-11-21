@@ -47,19 +47,16 @@ void CafeModalDialog::CheckActive(HWND hwnd)
 	else {
 		EnableWindow(ptr->hQua[0], FALSE);
 	}
-
 	if (lCheck2 == BST_CHECKED)
 		EnableWindow(ptr->hQua[1], TRUE);
 	else {
 		EnableWindow(ptr->hQua[1], FALSE);
 	}
-
 	if (lCheck3 == BST_CHECKED)
 		EnableWindow(ptr->hQua[2], TRUE);
 	else {
 		EnableWindow(ptr->hQua[2], FALSE);
 	}
-
 	if (lCheck4 == BST_CHECKED)
 		EnableWindow(ptr->hQua[3], TRUE);
 	else {
@@ -98,6 +95,14 @@ BOOL CafeModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 
 void CafeModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify)
 {
+	ptr->CheckActive(hwnd);
+
+	if (id == IDC_BUTTON1) {
+		TCHAR buffer[16];
+		int a = ptr->CalculateSum(hwnd);
+		wsprintf(buffer, TEXT("%d"), a);
+		SetWindowText(ptr->hTotal, buffer);
+	}
 	
 	if (id == IDOK)
 	{
@@ -119,26 +124,11 @@ void CafeModalDialog::Cls_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNo
 
 BOOL CALLBACK CafeModalDialog::DlgProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	ptr->CheckActive(hwnd);
-
-	if (LOWORD(wParam) == IDC_BUTTON1) {
-		TCHAR buffer[16];
-		int a = ptr->CalculateSum(hwnd);
-		wsprintf(buffer, TEXT("%d"), a);
-		SetWindowText(ptr->hTotal, buffer);
-	}
-
 	switch (message)
 	{
 		HANDLE_MSG(hwnd, WM_CLOSE, ptr->Cls_OnClose);
 		HANDLE_MSG(hwnd, WM_INITDIALOG, ptr->Cls_OnInitDialog);
 		HANDLE_MSG(hwnd, WM_COMMAND, ptr->Cls_OnCommand);
 	}
-	
-	
-
-
-		
-
 	return FALSE;
 }
