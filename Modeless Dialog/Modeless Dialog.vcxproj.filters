@@ -50,4 +50,12 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="32.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="64.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

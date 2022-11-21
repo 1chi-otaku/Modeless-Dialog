@@ -14,6 +14,7 @@ void CMainModalDialog::Cls_OnClose(HWND hwnd)
 	EndDialog(hwnd, IDCANCEL);
 }
 
+
 BOOL CMainModalDialog::Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam)
 {
 	//Getting handles for EditControl objects

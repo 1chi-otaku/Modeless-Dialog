@@ -2,6 +2,8 @@
 
 CafeModalDialog* CafeModalDialog::ptr = NULL;
 
+
+
 CafeModalDialog::CafeModalDialog(void)
 {
 	ptr = this;

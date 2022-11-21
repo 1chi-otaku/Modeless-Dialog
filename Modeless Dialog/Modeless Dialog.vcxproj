@@ -106,6 +106,10 @@
   <ItemGroup>
     <ResourceCompile Include="Modeless Dialog.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="32.ico" />
+    <Image Include="64.ico" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
